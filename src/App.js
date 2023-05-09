@@ -1,62 +1,65 @@
-import logo from './logo.svg';
-import './App.css';
-import { useState } from 'react';
-import Navigation from './Navigation/Navigation';
-import Todos from './Todos/Todos';
+import logo from "./logo.svg";
+import "./App.css";
+import { useEffect, useState } from "react";
+import Todos from "./Todos/Todos";
+import DataBoard from "./DataBoard/DataBoard";
 
 function App() {
-    const [name, setName] = useState('Peter')
+	const [name, setName] = useState("Peter");
 
-    const [address, setAddress] = useState('')
+	const [address, setAddress] = useState("");
 
-    const [todos, setTodos] = useState([
-        {
-            title: 'ReactJs'
-        },
-        {
-            title: 'React Native'
-        },
-        {
-            title: 'NodeJs'
-        }
-    ])
+	const [todos, setTodos] = useState([
+		{
+			title: "ReactJs",
+		},
+		{
+			title: "React Native",
+		},
+		{
+			title: "NodeJs",
+		},
+	]);
 
-    const handleClick = () => {
-        if (!address) {
-            alert('Null!!!!')
-        }
+	useEffect(() => {
+		setName(address);
+		console.log("React Native");
+	}, []);
 
-        const newTodo = {
-            title: address
-        }
+	const handleClick = () => {
+		if (!address) {
+			alert("Null!!!!");
+		}
 
-        setTodos([...todos, newTodo])
-        setAddress('')
-    }
+		const newTodo = {
+			title: address,
+		};
 
-    const handleValueChange = (e) => {
-        setAddress(e.target.value)
-    }
+		setTodos([...todos, newTodo]);
+		setAddress("");
+	};
 
-    return (
-        <div className="App">
-            <Navigation />
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <h1>
-                    Code ReactJs with {name}
-                </h1>
-                
-                <Todos
-                    todos={todos}
-                />
+	const handleValueChange = (e) => {
+		setAddress(e.target.value);
+	};
 
-                <input onChange={(e) => handleValueChange(e)} value={address} />
-                <br />
-                <button onClick={handleClick}>Click</button>
-            </header>
-        </div>
-    );
+	return (
+		<div className="App">
+			<header className="App-header">
+				<img src={logo} className="App-logo" alt="logo" />
+				<h1>Code ReactJs with {name}</h1>
+
+				<Todos todos={todos} />
+
+				<input onChange={(e) => handleValueChange(e)} value={address} />
+
+				<button onClick={handleClick}>Click</button>
+				<br />
+				<h2>Checking Covid In VietNam</h2>
+				<DataBoard />
+			</header>
+		</div>
+	);
 }
 
 export default App;
