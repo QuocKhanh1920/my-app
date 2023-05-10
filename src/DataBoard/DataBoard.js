@@ -1,44 +1,10 @@
 import "./DataBoard.scss";
 
-import { useEffect, useState } from "react";
-
-import axios from "axios";
-
-import moment from "moment/moment";
+import useFetch from "../Customize/useFetch";
 
 function DataBoard() {
-	const [dataCovid, setDataCovid] = useState([]);
-	const [isLoadings, setIsLoadings] = useState(true);
-	const [isError, setIsError] = useState(false);
-
-	useEffect(() => {
-		setTimeout(() => {
-			async function fetchData() {
-				try {
-					let res = await axios.get(
-						"https://api.covid19api.com/country/viietnam?from=2021-10-01T00%3A00%3A00Z&to=2021-10-20T00%3A00%3A00Z"
-					);
-					console.log(res);
-					let data = res && res.data ? res.data : [];
-					if (data && data.length > 0) {
-						data.map((item) => {
-							item.Date = moment(item.Date).format("DD/MM/YYYY");
-
-							return item;
-						});
-					}
-					setDataCovid(data);
-					setIsLoadings(false);
-					setIsError(false);
-				} catch (e) {
-					setIsError(true);
-					setIsLoadings(false);
-					alert(e.message);
-				}
-			}
-			fetchData();
-		}, 3000);
-	}, []);
+	const {data: dataCovid, isLoadings, isError } = useFetch("https://api.covid19api.com/country/vietnam?from=2021-10-01T00%3A00%3A00Z&to=2021-10-20T00%3A00%3A00Z")
+	
 	return (
 		<table>
 			{console.log("data: ", dataCovid)}

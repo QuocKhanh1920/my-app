@@ -1,7 +1,11 @@
 import logo from "./logo.svg";
+
 import "./App.css";
+
 import { useEffect, useState } from "react";
+
 import Todos from "./Todos/Todos";
+
 import DataBoard from "./DataBoard/DataBoard";
 
 function App() {
