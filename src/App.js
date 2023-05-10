@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 import Todos from "./Todos/Todos";
 
-import DataBoard from "./DataBoard/DataBoard";
+import DataBoard from "./DataBoard";
 
 function App() {
 	const [name, setName] = useState("Peter");
