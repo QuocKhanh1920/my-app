@@ -8,27 +8,36 @@ import moment from "moment/moment";
 
 function DataBoard() {
 	const [dataCovid, setDataCovid] = useState([]);
-	const [loadings, setLoadings] = useState(true);
+	const [isLoadings, setIsLoadings] = useState(true);
+	const [isError, setIsError] = useState(false);
 
 	useEffect(() => {
 		setTimeout(() => {
 			async function fetchData() {
-				let res = await axios.get(
-					"https://api.covid19api.com/country/vietnam?from=2021-10-01T00%3A00%3A00Z&to=2021-10-20T00%3A00%3A00Z"
-				);
-				let data = res && res.data ? res.data : [];
-				if (data && data.length > 0) {
-					data.map((item) => {
-						item.Date = moment(item.Date).format("DD/MM/YYYY");
+				try {
+					let res = await axios.get(
+						"https://api.covid19api.com/country/viietnam?from=2021-10-01T00%3A00%3A00Z&to=2021-10-20T00%3A00%3A00Z"
+					);
+					console.log(res);
+					let data = res && res.data ? res.data : [];
+					if (data && data.length > 0) {
+						data.map((item) => {
+							item.Date = moment(item.Date).format("DD/MM/YYYY");
 
-						return item;
-					});
+							return item;
+						});
+					}
+					setDataCovid(data);
+					setIsLoadings(false);
+					setIsError(false);
+				} catch (e) {
+					setIsError(true);
+					setIsLoadings(false);
+					alert(e.message);
 				}
-				setDataCovid(data);
-				setLoadings(false);
 			}
 			fetchData();
-		}, 1000);
+		}, 3000);
 	}, []);
 	return (
 		<table>
@@ -43,7 +52,8 @@ function DataBoard() {
 				</tr>
 			</thead>
 			<tbody>
-				{loadings === false &&
+				{isError === false &&
+					isLoadings === false &&
 					dataCovid &&
 					dataCovid.length > 0 &&
 					dataCovid.map((item) => {
@@ -57,8 +67,22 @@ function DataBoard() {
 							</tr>
 						);
 					})}
-				
-				{loadings === true && <tr><td colSpan='5' style={{textAlign: 'center'}}>Loading ...</td></tr>}
+
+				{isLoadings === true && (
+					<tr>
+						<td colSpan="5" style={{ textAlign: "center" }}>
+							Loading ...
+						</td>
+					</tr>
+				)}
+
+				{isError === true && (
+					<tr>
+						<td colSpan="5" style={{ textAlign: "center" }}>
+							Something wrongs ...
+						</td>
+					</tr>
+				)}
 			</tbody>
 		</table>
 	);
