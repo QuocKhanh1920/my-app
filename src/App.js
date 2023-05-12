@@ -8,6 +8,8 @@ import Todos from "./Todos/Todos";
 
 import DataBoard from "./DataBoard";
 
+import {Countdown, NewCountDown} from "./Countdown";
+
 function App() {
 	const [name, setName] = useState("Peter");
 
@@ -52,6 +54,9 @@ function App() {
 			<header className="App-header">
 				<img src={logo} className="App-logo" alt="logo" />
 				<h1>Code ReactJs with {name}</h1>
+				<Countdown />
+				<hr />
+				<NewCountDown />
 
 				<Todos todos={todos} />
 
