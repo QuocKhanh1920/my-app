@@ -1,74 +1,40 @@
-import logo from "./logo.svg";
+import logo from './logo.svg';
 
-import "./App.css";
+import './App.css';
 
-import { useEffect, useState } from "react";
+import Todos from './Todos';
 
-import Todos from "./Todos/Todos";
+import DataBoard from './DataBoard';
 
-import DataBoard from "./DataBoard";
+import Navigation from './Navigation';
 
-import {Countdown, NewCountDown} from "./Countdown";
+import { Countdown, NewCountDown } from './Countdown';
+
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
-	const [name, setName] = useState("Peter");
-
-	const [address, setAddress] = useState("");
-
-	const [todos, setTodos] = useState([
-		{
-			title: "ReactJs",
-		},
-		{
-			title: "React Native",
-		},
-		{
-			title: "NodeJs",
-		},
-	]);
-
-	useEffect(() => {
-		setName(address);
-		console.log("React Native");
-	}, []);
-
-	const handleClick = () => {
-		if (!address) {
-			alert("Null!!!!");
-		}
-
-		const newTodo = {
-			title: address,
-		};
-
-		setTodos([...todos, newTodo]);
-		setAddress("");
-	};
-
-	const handleValueChange = (e) => {
-		setAddress(e.target.value);
-	};
-
-	return (
-		<div className="App">
-			<header className="App-header">
-				<img src={logo} className="App-logo" alt="logo" />
-				<h1>Code ReactJs with {name}</h1>
-				<Countdown />
-				<hr />
-				<NewCountDown />
-
-				<Todos todos={todos} />
-
-				<input onChange={(e) => handleValueChange(e)} value={address} />
-
-				<button onClick={handleClick}>Click</button>
-				<br />
-				<h2>Checking Covid In VietNam</h2>
-				<DataBoard />
-			</header>
-		</div>
-	);
+    return (
+        <div className="App">
+            <header className="App-header">
+                <Navigation />
+                <img src={logo} className="App-logo" alt="logo" />
+                <Routes>
+                    <Route path="/" element={<DataBoard />} />
+                    <Route path="/todos" element={<Todos />} />
+                    <Route
+                        path="/countdown"
+                        element={
+                            <div>
+                                <Countdown />
+                                <span>------------------------------</span>
+                                <NewCountDown />
+                            </div>
+                        }
+                    ></Route>
+                </Routes>
+            </header>
+        </div>
+    );
 }
 
 export default App;
