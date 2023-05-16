@@ -12,7 +12,6 @@ function DataBoard() {
                 {console.log('data: ', dataPost)}
                 <thead>
                     <tr>
-                        <td>User ID</td>
                         <th>ID</th>
                         <th>Title</th>
                         <th>Body</th>
