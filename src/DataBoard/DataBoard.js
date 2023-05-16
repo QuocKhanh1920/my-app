@@ -1,47 +1,34 @@
 import './DataBoard.scss';
 
-import moment from 'moment';
-
 import useFetch from '../Customize/useFetch';
 
 function DataBoard() {
-    const today = new Date(new Date().setHours(0, 0, 0, 0));
-    const previousDay = moment().subtract(30, 'days');
-    const {
-        data: dataCovid,
-        isLoadings,
-        isError,
-    } = useFetch(
-        `https://api.covid19api.com/country/vietnam?from=${today.toISOString()}&to=${previousDay.toISOString()}`,
-    );
+    const { data: dataPost, isLoadings, isError } = useFetch('https://jsonplaceholder.typicode.com/posts');
 
     return (
         <div style={{ width: '100%' }}>
-            <h2>Checking Covid In VietNam</h2>
+            <h2>Post API</h2>
             <table>
-                {console.log('data: ', dataCovid)}
+                {console.log('data: ', dataPost)}
                 <thead>
                     <tr>
-                        <td>Date</td>
-                        <th>Confirmed</th>
-                        <th>Deaths</th>
-                        <th>Recovered</th>
-                        <th>Active</th>
+                        <td>User ID</td>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Body</th>
                     </tr>
                 </thead>
                 <tbody>
                     {isError === false &&
                         isLoadings === false &&
-                        dataCovid &&
-                        dataCovid.length > 0 &&
-                        dataCovid.map((item) => {
+                        dataPost &&
+                        dataPost.length > 0 &&
+                        dataPost.map((item, index) => {
                             return (
-                                <tr key={item.ID}>
-                                    <td>{item.Date}</td>
-                                    <td>{item.Confirmed}</td>
-                                    <td>{item.Deaths}</td>
-                                    <td>{item.Recovered}</td>
-                                    <td>{item.Active}</td>
+                                <tr key={index}>
+                                    <td>{item.id}</td>
+                                    <td>{item.title}</td>
+                                    <td>{item.body}</td>
                                 </tr>
                             );
                         })}
