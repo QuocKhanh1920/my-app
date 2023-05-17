@@ -8,6 +8,10 @@ import DataBoard from './DataBoard';
 
 import Navigation from './Navigation';
 
+import Blog from './Blog';
+
+import BlogDetails from './Blog/BlogDetails';
+
 import { Countdown, NewCountDown } from './Countdown';
 
 import { Routes, Route } from 'react-router-dom';
@@ -21,6 +25,9 @@ function App() {
                 <Routes>
                     <Route path="/" element={<DataBoard />} />
                     <Route path="/todos" element={<Todos />} />
+                    <Route path="/blog" element={<Blog />} />
+                    <Route path="/blog/:id" element={<BlogDetails />} />
+
                     <Route
                         path="/countdown"
                         element={

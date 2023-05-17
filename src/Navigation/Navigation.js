@@ -12,6 +12,9 @@ function Navigation() {
                 <NavLink to="/todos">Todos</NavLink>
             </li>
             <li>
+                <NavLink to="/blog">Blog</NavLink>
+            </li>
+            <li>
                 <NavLink to="/countdown">Countdown</NavLink>
             </li>
         </ul>

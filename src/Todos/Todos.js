@@ -5,7 +5,7 @@ function Todos() {
 
     const [address, setAddress] = useState('');
 
-    const handleClick = () => {
+    const handleAdd = () => {
         if (!address) {
             alert('Null!!!!');
         }
@@ -16,6 +16,14 @@ function Todos() {
 
         setTodos([...todos, newTodo]);
         setAddress('');
+    };
+
+    const handleDelete = (index) => {
+        setTodos((prev) => {
+            const remainJobs = prev.filter((item, items) => items !== index);
+
+            return remainJobs;
+        });
     };
 
     const [todos, setTodos] = useState([
@@ -42,11 +50,18 @@ function Todos() {
         <div className="todos">
             <h1>Code ReactJs with {name}</h1>
             {todos.map((todo, index) => {
-                return <div key={index}>{todo.title}</div>;
+                return (
+                    <div key={index} style={{ display: 'flex', justifyContent: 'center' }}>
+                        {todo.title}
+                        <div style={{ marginLeft: 10 }} onClick={() => handleDelete(index)}>
+                            x
+                        </div>
+                    </div>
+                );
             })}
             <input onChange={(e) => handleValueChange(e)} value={address} />
 
-            <button onClick={handleClick}>Click</button>
+            <button onClick={handleAdd}>Click</button>
         </div>
     );
 }

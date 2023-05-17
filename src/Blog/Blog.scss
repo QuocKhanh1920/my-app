@@ -1,0 +1,46 @@
+.content {
+    display        : flex;
+    flex-wrap      : wrap;
+    justify-content: space-evenly;
+
+    .box {
+        border       : 5px solid green;
+        border-radius: 50px;
+        padding      : 40px 20px;
+        margin-bottom: 40px;
+        width        : 25%;
+
+        .name {
+            width        : 100%;
+            height       : 20px;
+            margin-bottom: 35px;
+            padding      : 10px;
+        }
+
+        .comment {
+            height: 200px;
+        }
+
+        .button {
+            display        : flex;
+            justify-content: center;
+
+            .view {
+                display         : flex;
+                color           : white;
+                background-color: transparent;
+                border          : 5px solid green;
+                border-radius   : 20px;
+                text-decoration : none;
+
+                p {
+                    font-size  : 18px;
+                    font-weight: 600;
+                    margin     : 0;
+                    padding    : 10px;
+                }
+            }
+        }
+
+    }
+}
