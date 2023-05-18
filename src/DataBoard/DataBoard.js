@@ -1,6 +1,6 @@
 import './DataBoard.scss';
 
-import useFetch from '../Customize/useFetch';
+import useFetch from '../useFetch';
 
 function DataBoard() {
     const { data: dataPost, isLoadings, isError } = useFetch('https://jsonplaceholder.typicode.com/posts');

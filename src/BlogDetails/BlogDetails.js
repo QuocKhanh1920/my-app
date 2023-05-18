@@ -1,5 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 
+import useFetch from '../useFetch';
+
 import './BlogDetails.scss';
 
 function BlogDetails() {
@@ -7,14 +9,35 @@ function BlogDetails() {
 
     let navigate = useNavigate();
 
+    const {
+        data: dataBlogDetails,
+        isLoadings,
+        isError,
+    } = useFetch(`https://jsonplaceholder.typicode.com/comments/${id}`);
+
     const handleBackPage = () => {
         navigate('/blog');
     };
 
     return (
         <div className="header">
-            <span onClick={handleBackPage}>---- Back ----</span>
-            <h2>Welcome to blog no {id}</h2>
+            ----<span onClick={handleBackPage}> Back </span>----
+            {dataBlogDetails && (
+                <>
+                    <h3>Blog ID: {id}</h3>
+                    {isLoadings ? (
+                        'Loading data ...'
+                    ) : (
+                        <>
+                            <h2>Welcome to blog of {dataBlogDetails.email}</h2>
+                            <div className="blog-details">
+                                <div className="blog-name">{dataBlogDetails.name}</div>
+                                <div className="blog-content">{dataBlogDetails.body}</div>
+                            </div>
+                        </>
+                    )}
+                </>
+            )}
         </div>
     );
 }
