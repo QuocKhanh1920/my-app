@@ -10,7 +10,7 @@ import Navigation from './Navigation';
 
 import Blog from './Blog';
 
-import BlogDetails from './Blog/BlogDetails';
+import BlogDetails from './BlogDetails';
 
 import { Countdown, NewCountDown } from './Countdown';
 

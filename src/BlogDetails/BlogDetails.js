@@ -1,5 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 
+import './BlogDetails.scss';
+
 function BlogDetails() {
     let { id } = useParams();
 
@@ -10,9 +12,9 @@ function BlogDetails() {
     };
 
     return (
-        <div>
+        <div className="header">
             <span onClick={handleBackPage}>---- Back ----</span>
-            <h2>Welcome to blog no {id}</h2>;
+            <h2>Welcome to blog no {id}</h2>
         </div>
     );
 }
