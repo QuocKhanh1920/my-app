@@ -12,6 +12,8 @@ import Blog from './Blog';
 
 import BlogDetails from './BlogDetails';
 
+import AddNewBlog from './AddNewBlog';
+
 import { Countdown, NewCountDown } from './Countdown';
 
 import { Routes, Route } from 'react-router-dom';
@@ -27,6 +29,7 @@ function App() {
                     <Route path="/todos" element={<Todos />} />
                     <Route path="/blog" element={<Blog />} />
                     <Route path="/blog/:id" element={<BlogDetails />} />
+                    <Route path="/add-new-blog" element={<AddNewBlog />} />
 
                     <Route
                         path="/countdown"

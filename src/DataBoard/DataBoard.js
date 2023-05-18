@@ -1,4 +1,4 @@
-import './DataBoard.scss';
+import './DataBoard.modules.scss';
 
 import useFetch from '../useFetch';
 

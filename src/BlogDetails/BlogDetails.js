@@ -2,7 +2,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 import useFetch from '../useFetch';
 
-import './BlogDetails.scss';
+import './BlogDetails.modules.scss';
 
 function BlogDetails() {
     let { id } = useParams();
@@ -20,7 +20,7 @@ function BlogDetails() {
     };
 
     return (
-        <div className="header">
+        <div className="container">
             ----<span onClick={handleBackPage}> Back </span>----
             {dataBlogDetails && (
                 <>
@@ -31,7 +31,7 @@ function BlogDetails() {
                         <>
                             <h2>Welcome to blog of {dataBlogDetails.email}</h2>
                             <div className="blog-details">
-                                <div className="blog-name">{dataBlogDetails.name}</div>
+                                <div className="blog-title">{dataBlogDetails.name}</div>
                                 <div className="blog-content">{dataBlogDetails.body}</div>
                             </div>
                         </>
