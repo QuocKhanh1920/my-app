@@ -6,16 +6,20 @@ function AddNewBlog() {
 
     const [content, setContent] = useState('');
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
         setTitle('');
         setContent('');
-        console.log(title, content);
+        e.preventDefault();
+        if (!title || !content) {
+            alert('Empty');
+        }
+        console.log(content, title);
     };
 
     return (
         <>
             <h2>Created New Blog</h2>
-            <div className="form">
+            <form onSubmit={handleSubmit}>
                 <div className="input-data">
                     <label>Title: </label>
                     <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
@@ -24,8 +28,8 @@ function AddNewBlog() {
                     <label>Content: </label>
                     <input type="text" value={content} onChange={(e) => setContent(e.target.value)} />
                 </div>
-                <button onClick={handleSubmit}>Add</button>
-            </div>
+                <button type="submit">Add</button>
+            </form>
         </>
     );
 }
