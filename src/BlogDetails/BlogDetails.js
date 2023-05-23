@@ -9,11 +9,7 @@ function BlogDetails() {
 
     let navigate = useNavigate();
 
-    const {
-        data: dataBlogDetails,
-        isLoadings,
-        isError,
-    } = useFetch(`https://jsonplaceholder.typicode.com/comments/${id}`);
+    const { data: dataBlogDetails, isLoadings } = useFetch(`https://jsonplaceholder.typicode.com/comments/${id}`);
 
     const handleBackPage = () => {
         navigate('/blog');
@@ -31,8 +27,8 @@ function BlogDetails() {
                         <>
                             <h2>Welcome to blog of {dataBlogDetails.email}</h2>
                             <div className="blog-details">
-                                <div className="blog-title">{dataBlogDetails.name}</div>
-                                <div className="blog-content">{dataBlogDetails.body}</div>
+                                <div className="blog-title">Title: {dataBlogDetails.name}</div>
+                                <div className="blog-content">Content: {dataBlogDetails.body}</div>
                             </div>
                         </>
                     )}
