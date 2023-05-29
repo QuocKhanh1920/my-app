@@ -5,6 +5,12 @@ import useFetch from '../useFetch';
 function DataBoard() {
     const { data: dataPost, isLoadings, isError } = useFetch('https://jsonplaceholder.typicode.com/posts');
 
+    let newData = [];
+
+    if (dataPost && dataPost.length > 0) {
+        newData = dataPost.slice(0, 20);
+    }
+
     return (
         <div style={{ width: '100%' }}>
             <h2>Post API</h2>
@@ -20,9 +26,9 @@ function DataBoard() {
                 <tbody>
                     {isError === false &&
                         isLoadings === false &&
-                        dataPost &&
-                        dataPost.length > 0 &&
-                        dataPost.map((item, index) => {
+                        newData &&
+                        newData.length > 0 &&
+                        newData.map((item, index) => {
                             return (
                                 <tr key={index}>
                                     <td>{item.id}</td>

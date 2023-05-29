@@ -17,6 +17,9 @@ function Navigation() {
             <li>
                 <NavLink to="/countdown">Countdown</NavLink>
             </li>
+            <li>
+                <NavLink to="/search">Search</NavLink>
+            </li>
         </ul>
     );
 }

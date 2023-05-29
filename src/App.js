@@ -14,6 +14,8 @@ import BlogDetails from './BlogDetails';
 
 import AddNewBlog from './AddNewBlog';
 
+import Search from './Search';
+
 import NotFound from './NotFound';
 
 import { Countdown, NewCountDown } from './Countdown';
@@ -42,6 +44,7 @@ function App() {
                             </div>
                         }
                     ></Route>
+                    <Route path="/search" element={<Search />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </header>
