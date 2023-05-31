@@ -1,67 +1,98 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+
+import './Todos.modules.scss';
 
 function Todos() {
-    const [name, setName] = useState('Peter');
+    const [job, setJob] = useState([]);
 
-    const [address, setAddress] = useState('');
+    const [jobs, setJobs] = useState(() => {
+        const storrageJobs = JSON.parse(localStorage.getItem('jobs'));
 
-    const handleAdd = () => {
-        if (!address) {
-            alert('Null!!!!');
-        }
+        console.log(storrageJobs);
 
-        const newTodo = {
-            title: address,
-        };
+        return storrageJobs ?? [];
+    });
 
-        setTodos([...todos, newTodo]);
-        setAddress('');
+    const [editInput, setEditInput] = useState(false);
+
+    const handleJobs = () => {
+        setJobs((prev) => {
+            const newJobs = [...prev, job];
+
+            const jsonJobs = JSON.stringify(newJobs);
+
+            localStorage.setItem('jobs', jsonJobs);
+
+            return newJobs;
+        });
+        setJob('');
+    };
+
+    const handleEdit = (index, newEdit) => {
+        const newList = jobs.map((item, i) => (i === index ? newEdit : item));
+
+        localStorage.setItem('jobs', JSON.stringify(newList));
+
+        setJobs(newList);
+    };
+
+    const handleCancelEdit = () => {
+        setEditInput(!editInput);
     };
 
     const handleDelete = (index) => {
-        setTodos((prev) => {
-            const remainJobs = prev.filter((item, items) => items !== index);
+        const newList = jobs.filter((_, i) => i !== index);
 
-            return remainJobs;
-        });
+        localStorage.setItem('jobs', JSON.stringify(newList));
+
+        setJobs(newList);
     };
 
-    const [todos, setTodos] = useState([
-        {
-            title: 'ReactJs',
-        },
-        {
-            title: 'React Native',
-        },
-        {
-            title: 'NodeJs',
-        },
-    ]);
-
-    useEffect(() => {
-        setName(address);
-        console.log('React Native');
-    }, [address]);
-
-    const handleValueChange = (e) => {
-        setAddress(e.target.value);
-    };
     return (
-        <div className="todos">
-            <h1>Code ReactJs with {name}</h1>
-            {todos.map((todo, index) => {
-                return (
-                    <div key={index} style={{ display: 'flex', justifyContent: 'center' }}>
-                        {todo.title}
-                        <div style={{ marginLeft: 10 }} onClick={() => handleDelete(index)}>
-                            x
-                        </div>
-                    </div>
-                );
-            })}
-            <input onChange={(e) => handleValueChange(e)} value={address} />
+        <div className="todolist-container">
+            <div className="add-todolist">
+                <input value={job} onChange={(e) => setJob(e.target.value)} />
 
-            <button onClick={handleAdd}>Click</button>
+                <button className="btn btn-primary" onClick={handleJobs}>
+                    Add
+                </button>
+            </div>
+
+            <ul>
+                {jobs.map((job, index) => (
+                    <div className="update-content" key={index}>
+                        {editInput ? (
+                            <div className="edit-content" key={index}>
+                                <input
+                                    type="text"
+                                    defaultValue={job}
+                                    onChange={(e) => handleEdit(index, e.target.value)}
+                                />
+                                <button className="btn btn-success" onClick={() => setEditInput(null)}>
+                                    Save
+                                </button>
+
+                                <button className="btn btn-secondary" onClick={handleCancelEdit}>
+                                    Cancel
+                                </button>
+                            </div>
+                        ) : (
+                            <div className="non-edit-content" key={index}>
+                                <li key={index}>
+                                    {job}
+                                    <button className="btn btn-danger" onClick={() => handleDelete(index)}>
+                                        Delete
+                                    </button>
+
+                                    <button className="btn btn-info" onClick={() => setEditInput(true)}>
+                                        Edit
+                                    </button>
+                                </li>
+                            </div>
+                        )}
+                    </div>
+                ))}
+            </ul>
         </div>
     );
 }

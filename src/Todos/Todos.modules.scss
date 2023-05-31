@@ -1,0 +1,32 @@
+.todolist-container {
+    width     : 100%;
+    margin-top: 50px;
+
+    .add-todolist {
+        display        : flex;
+        justify-content: center;
+        align-items    : center;
+    }
+
+    ul {
+        margin-top      : 40px;
+        background-color: transparent;
+
+        .edit-content {
+            display        : flex;
+            justify-content: center;
+            align-items    : center;
+        }
+
+        li {
+            width          : 100%;
+            display        : flex;
+            justify-content: center;
+            align-items    : center;
+        }
+    }
+
+    .btn {
+        margin: 0 20px;
+    }
+}
