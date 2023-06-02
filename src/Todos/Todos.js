@@ -3,25 +3,23 @@ import { useState } from 'react';
 import './Todos.modules.scss';
 
 function Todos() {
-    const [job, setJob] = useState([]);
+    const [job, setJob] = useState('');
 
     const [jobs, setJobs] = useState(() => {
-        const storrageJobs = JSON.parse(localStorage.getItem('jobs'));
+        const storageJobs = JSON.parse(localStorage.getItem('jobs'));
 
-        console.log(storrageJobs);
+        console.log(storageJobs);
 
-        return storrageJobs ?? [];
+        return storageJobs ?? [];
     });
 
     const [editInput, setEditInput] = useState(false);
 
-    const handleJobs = () => {
+    const handleAdd = () => {
         setJobs((prev) => {
             const newJobs = [...prev, job];
 
-            const jsonJobs = JSON.stringify(newJobs);
-
-            localStorage.setItem('jobs', jsonJobs);
+            localStorage.setItem('jobs', JSON.stringify(newJobs));
 
             return newJobs;
         });
@@ -41,11 +39,13 @@ function Todos() {
     };
 
     const handleDelete = (index) => {
-        const newList = jobs.filter((_, i) => i !== index);
+        setJobs((prev) => {
+            const remainJobs = prev.filter((item, items) => items !== index);
 
-        localStorage.setItem('jobs', JSON.stringify(newList));
+            localStorage.setItem('job', JSON.stringify(remainJobs));
 
-        setJobs(newList);
+            return remainJobs;
+        });
     };
 
     return (
@@ -53,7 +53,7 @@ function Todos() {
             <div className="add-todolist">
                 <input value={job} onChange={(e) => setJob(e.target.value)} />
 
-                <button className="btn btn-primary" onClick={handleJobs}>
+                <button className="btn btn-primary" onClick={handleAdd}>
                     Add
                 </button>
             </div>
