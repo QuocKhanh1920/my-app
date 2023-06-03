@@ -42,7 +42,7 @@ function Todos() {
         setJobs((prev) => {
             const remainJobs = prev.filter((item, items) => items !== index);
 
-            localStorage.setItem('job', JSON.stringify(remainJobs));
+            localStorage.setItem('jobs', JSON.stringify(remainJobs));
 
             return remainJobs;
         });
@@ -68,7 +68,7 @@ function Todos() {
                                     defaultValue={job}
                                     onChange={(e) => handleEdit(index, e.target.value)}
                                 />
-                                <button className="btn btn-success" onClick={() => setEditInput(null)}>
+                                <button className="btn btn-success" onClick={() => setEditInput(false)}>
                                     Save
                                 </button>
 
