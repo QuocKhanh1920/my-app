@@ -2,6 +2,8 @@ import logo from './logo.svg';
 
 import './App.scss';
 
+import Home from './Home/Home';
+
 import Todos from './Todos';
 
 import DataBoard from './DataBoard';
@@ -29,7 +31,8 @@ function App() {
                 <Navigation />
                 <img src={logo} className="App-logo" alt="logo" />
                 <Routes>
-                    <Route path="/" element={<DataBoard />} />
+                    <Route path="/my-app" element={<Home />} />
+                    <Route path="/databoard" element={<DataBoard />} />
                     <Route path="/todos" element={<Todos />} />
                     <Route path="/blog" element={<Blog />} />
                     <Route path="/blog/:id" element={<BlogDetails />} />
